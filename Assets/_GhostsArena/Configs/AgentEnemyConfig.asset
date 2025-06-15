@@ -47,4 +47,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <AgroRange>k__BackingField: 5
-  <MinDistanceToTarget>k__BackingField: 1
+  <MinDistanceToTarget>k__BackingField: 2

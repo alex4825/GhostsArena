@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(CinemachineVirtualCamera))]
 public class VirtualCameraRotator : MonoBehaviour
 {
+    private const int RightMouseButton = 1;
+
     private CinemachineOrbitalTransposer _orbitalTransposer;
     private float _initialSpeed;
 
@@ -16,9 +18,9 @@ public class VirtualCameraRotator : MonoBehaviour
         _orbitalTransposer.m_XAxis.m_MaxSpeed = 0;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(RightMouseButton))
             _orbitalTransposer.m_XAxis.m_MaxSpeed = _initialSpeed;
         else
             _orbitalTransposer.m_XAxis.m_MaxSpeed = 0f;

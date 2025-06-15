@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3a2d4aa9cd19645bf07fb3cb03fe7a, type: 3}
+  m_Name: MainHeroConfig
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: -3031037212194456982, guid: ade3e4f5bd5c52e48b9e2667e6891f62,
+    type: 3}
+  <MaxHealth>k__BackingField: 100
+  <WalkingSpeed>k__BackingField: 3
+  <RunSpeed>k__BackingField: 7
+  <RotationSpeed>k__BackingField: 500
+  <TimeToSpawn>k__BackingField: 2
+  <DeadDuration>k__BackingField: 5
+  <FollowCameraPrefab>k__BackingField: {fileID: 371123635926219165, guid: d31e25f0a138acc49ba365f02e7f8f36,
+    type: 3}
