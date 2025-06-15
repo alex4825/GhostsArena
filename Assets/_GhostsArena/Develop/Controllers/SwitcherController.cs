@@ -1,21 +1,17 @@
 using UnityEngine;
 
-public class CompositeController : Controller
+public class SwitcherController : Controller
 {
     private Controller _mainController;
     private Controller _idleController;
 
-    private float _maxIdleTime;
-    private float _idleTimer;
-
-    public CompositeController(Controller mainController, Controller idleController, float maxIdleTime)
+    public SwitcherController(Controller mainController, Controller idleController)
     {
         _mainController = mainController;
         _idleController = idleController;
-        _maxIdleTime = maxIdleTime;
 
-        _mainController.IsEnabled = true;
-        _idleController.IsEnabled = false;
+        _mainController.IsEnabled = false;
+        _idleController.IsEnabled = true;
     }
 
     public override bool HasInput => _mainController.HasInput || _idleController.HasInput;
@@ -24,17 +20,12 @@ public class CompositeController : Controller
     {
         if (_mainController.HasInput)
         {
-            _idleTimer = 0;
+            _mainController.IsEnabled = true;
             _idleController.IsEnabled = false;
         }
         else
         {
-            _idleTimer += Time.deltaTime;
-        }
-
-        if (_idleTimer >= _maxIdleTime)
-        {
-            _idleTimer = 0;
+            _mainController.IsEnabled = false;
             _idleController.IsEnabled = true;
         }
 

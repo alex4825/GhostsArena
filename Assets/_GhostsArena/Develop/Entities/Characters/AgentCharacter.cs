@@ -44,9 +44,4 @@ public class AgentCharacter : Character, IAgentMovable
     }
 
     public void Jump(OffMeshLinkData offMeshLinkData) => _jumper.Jump(offMeshLinkData);
-
-    private void OnDestroy()
-    {
-        
-    }
 }

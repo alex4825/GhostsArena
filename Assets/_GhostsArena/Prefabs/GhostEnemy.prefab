@@ -233,8 +233,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2438505940080124746}
-  - component: {fileID: 112659741009881724}
   - component: {fileID: 1236435466169836935}
+  - component: {fileID: 5150371798215690389}
   m_Layer: 0
   m_Name: GhostEnemy
   m_TagString: Untagged
@@ -258,18 +258,6 @@ Transform:
   - {fileID: 4968302064014025216}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &112659741009881724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981532379986748900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215af91e4a6ffa443bbb4ce81abbb9d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &1236435466169836935
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -292,6 +280,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5150371798215690389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981532379986748900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b47031789f7b74a91419a7d1a9d1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2012365603447684830
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd07eaa41739dd143a7c1e6af9f79912, type: 3}
-  m_Name: MainHeroAgentConfig
+  m_Script: {fileID: 11500000, guid: 0904362f9811ba3439bcd551bf0fa9d8, type: 3}
+  m_Name: AgentEnemyConfig
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: -5130999630716415167, guid: ade3e4f5bd5c52e48b9e2667e6891f62,
+  <Prefab>k__BackingField: {fileID: 5150371798215690389, guid: 7cdd7b81aa43f6446b473a463c3de338,
     type: 3}
   <MaxHealth>k__BackingField: 100
   <WalkingSpeed>k__BackingField: 3
@@ -46,3 +46,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <AgroRange>k__BackingField: 5
+  <MinDistanceToTarget>k__BackingField: 1

@@ -422,13 +422,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c02a9ddeb151f45891645ddfb95432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agentConfig: {fileID: 11400000, guid: 4adb7a627cc947644bdb17aeae082fc2, type: 2}
-  _spawnPoint: {fileID: 1379198227}
+  _agentHeroConfig: {fileID: 11400000, guid: 4adb7a627cc947644bdb17aeae082fc2, type: 2}
+  _agentEnemyConfig: {fileID: 11400000, guid: 7e44102c28d3020438ecd60b5dbf71d8, type: 2}
+  _heroSpawnPoint: {fileID: 1379198227}
+  _enemySpawnPoint: {fileID: 1791630697}
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
-  _maxIdleTime: 10
-  _patrolRadius: 10
+  _patrolRadius: 20
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1379198227}
   m_Layer: 0
-  m_Name: SpawnPoint
+  m_Name: MainHeroSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -627,7 +628,38 @@ Transform:
   m_GameObject: {fileID: 1379198226}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.02, y: 0, z: 0.38}
+  m_LocalPosition: {x: -8.48, y: 0, z: 0.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1791630696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1791630697}
+  m_Layer: 0
+  m_Name: EnemySpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1791630697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791630696}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.34, y: 0, z: 0.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -699,7 +731,7 @@ PrefabInstance:
     - target: {fileID: 8409189007879928075, guid: ade3e4f5bd5c52e48b9e2667e6891f62,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -717,3 +749,4 @@ SceneRoots:
   - {fileID: 854974485}
   - {fileID: 571487681}
   - {fileID: 1379198227}
+  - {fileID: 1791630697}

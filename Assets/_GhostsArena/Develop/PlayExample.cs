@@ -1,36 +1,41 @@
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class PlayExample : MonoBehaviour
 {
-    [SerializeField] private AgentConfig _agentConfig;
-    [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private AgentConfig _agentHeroConfig;
+    [SerializeField] private AgentEnemyConfig _agentEnemyConfig;
+    [SerializeField] private Transform _heroSpawnPoint;
+    [SerializeField] private Transform _enemySpawnPoint;
     [SerializeField] private LayerMask _groundMask;
 
-    [SerializeField] private float _maxIdleTime;
     [SerializeField] private float _patrolRadius;
 
-    private AgentCharacter _character;
-    private Controller _agentCharacterController;
+    private AgentEnemyCharacter _enemyCharacter;
+    private AgentCharacter _heroCharacter;
+
+    private Controller _agentEnemyController;
+    //private Controller _agentHeroController;
 
     private void Awake()
     {
-        _character = Instantiate(_agentConfig.Prefab, _spawnPoint.position, Quaternion.identity);
-        _character.Initialize(_agentConfig);
+        _enemyCharacter = Instantiate(_agentEnemyConfig.Prefab as AgentEnemyCharacter, _enemySpawnPoint.position, Quaternion.identity);
+        _enemyCharacter.Initialize(_agentEnemyConfig);
 
-        _agentCharacterController = new CompositeController(
-            new AgentClickPointController(_character, _groundMask),
-            new AgentRandomPatrolController(_character, _patrolRadius),
-            _maxIdleTime); 
+        _heroCharacter = Instantiate(_agentHeroConfig.Prefab as AgentCharacter, _heroSpawnPoint.position, Quaternion.identity);
+        _heroCharacter.Initialize(_agentHeroConfig);
 
-        _agentCharacterController.IsEnabled = true;
+        _agentEnemyController = new SwitcherController(
+            new AgentEnemyAgroController(_enemyCharacter, _heroCharacter.transform),
+            new AgentRandomPatrolController(_enemyCharacter, _patrolRadius)); 
+
+        _agentEnemyController.IsEnabled = true;
     }
 
     private void Update()
     {
-        _agentCharacterController.IsEnabled = _character.IsAlive;
+        _agentEnemyController.IsEnabled = _enemyCharacter.IsAlive;
 
-        _agentCharacterController.Update();
+        _agentEnemyController.Update();
     }
 
 }
