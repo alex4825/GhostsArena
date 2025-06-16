@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour, IDamagable, IHealthable, IKillable, IMovable, IJumpable
+public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable, IJumpable
 {
     protected float RotationSpeed;
 

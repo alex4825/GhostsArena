@@ -5,33 +5,25 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Image _barImage;
 
-    private IHealthable _healthable;
+    private IDamagable _damagable;
     private float _maxWidth;
     private float _healthWidthKoef;
 
-    private bool _isInitiated;
-    private float _currentHealth;
-
-    public void Initiate(IHealthable healthable)
+    public void Initialize(IDamagable damagable)
     {
-        _healthable = healthable;
+        _damagable = damagable;
 
         _maxWidth = _barImage.rectTransform.rect.width;
-        _healthWidthKoef = _maxWidth / _healthable.MaxHealth;
+        _healthWidthKoef = _maxWidth / _damagable.MaxHealth;
 
-        _isInitiated = true;
-        _currentHealth = _healthable.Health;
-    }
-
-    private void Update()
-    {
-        if (_isInitiated && _healthable.Health != _currentHealth)
-        {
-            _currentHealth = _healthable.Health;
-            RecalculateBarWidth();
-        }
+        _damagable.Hit += RecalculateBarWidth;
     }
 
     public void RecalculateBarWidth()
-         => _barImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _healthable.Health * _healthWidthKoef);
+         => _barImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _damagable.Health * _healthWidthKoef);
+
+    private void OnDestroy()
+    {
+        _damagable.Hit -= RecalculateBarWidth;
+    }
 }
