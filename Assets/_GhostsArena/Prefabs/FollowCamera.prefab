@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2470211569562190496}
   - component: {fileID: 371123635926219165}
   - component: {fileID: 1898971414328300569}
+  - component: {fileID: 124095108959531006}
   m_Layer: 0
   m_Name: FollowCamera
   m_TagString: Untagged
@@ -85,6 +86,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a107b16c32710d940916c187b8c732c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &124095108959531006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284918473877248387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 65
+  m_IgnoreTag: 
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 1.01
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0.32
+  m_Damping: 1.03
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &1967992710765189844
 GameObject:
   m_ObjectHideFlags: 0

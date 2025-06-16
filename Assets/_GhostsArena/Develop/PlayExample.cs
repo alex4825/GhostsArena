@@ -14,7 +14,7 @@ public class PlayExample : MonoBehaviour
     [SerializeField] private float _patrolRadius;
 
     private AgentEnemyCharacter _enemyCharacter;
-    private RigidbodyCharacter _heroCharacter;
+    private CharacterControllerCharacter _heroCharacter;
 
     private Controller _agentEnemyController;
     private Controller _heroController;
@@ -26,14 +26,14 @@ public class PlayExample : MonoBehaviour
         _enemyCharacter = Instantiate(_agentEnemyConfig.Prefab as AgentEnemyCharacter, _enemySpawnPoint.position, Quaternion.identity);
         _enemyCharacter.Initialize(_agentEnemyConfig);
 
-        _heroCharacter = Instantiate(_mainHeroConfig.Prefab as RigidbodyCharacter, _heroSpawnPoint.position, Quaternion.identity);
+        _heroCharacter = Instantiate(_mainHeroConfig.Prefab as CharacterControllerCharacter, _heroSpawnPoint.position, Quaternion.identity);
         _heroCharacter.Initialize(_mainHeroConfig);
 
         _agentEnemyController = new SwitcherController(
             new AgentEnemyAgroController(_enemyCharacter, _heroCharacter.transform),
             new AgentRandomPatrolController(_enemyCharacter, _patrolRadius));
 
-        _heroController = new DirectionalRigidbodyWASDController(_heroCharacter);
+        _heroController = new DirectionalCharacterControllerWASDController(_heroCharacter);
 
         _agentEnemyController.IsEnabled = true;
         _heroController.IsEnabled = true;
@@ -46,14 +46,9 @@ public class PlayExample : MonoBehaviour
     private void Update()
     {
         _agentEnemyController.IsEnabled = _enemyCharacter.IsAlive;
+        _heroController.IsEnabled = _heroCharacter.IsAlive;
 
         _agentEnemyController.Update();
-    }
-
-    private void FixedUpdate()
-    {
-        _heroController.IsEnabled = _heroCharacter.IsAlive;
         _heroController.Update();
     }
-
 }

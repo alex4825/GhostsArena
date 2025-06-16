@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class DirectionalRigidbodyWASDController : Controller
+public class DirectionalCharacterControllerWASDController : Controller
 {
     private const string NameAxisX = "Horizontal";
     private const string NameAxisZ = "Vertical";
 
-    private RigidbodyCharacter _character;
+    private CharacterControllerCharacter _character;
 
-    public DirectionalRigidbodyWASDController(RigidbodyCharacter character)
+    public DirectionalCharacterControllerWASDController(CharacterControllerCharacter character)
     {
         _character = character;
     }
