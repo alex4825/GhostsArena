@@ -20,6 +20,6 @@ MonoBehaviour:
   <RotationSpeed>k__BackingField: 500
   <TimeToSpawn>k__BackingField: 2
   <DeadDuration>k__BackingField: 5
-  <JumpForce>k__BackingField: 0
+  <JumpHeight>k__BackingField: 3
   <FollowCameraPrefab>k__BackingField: {fileID: 371123635926219165, guid: d31e25f0a138acc49ba365f02e7f8f36,
     type: 3}

@@ -17,6 +17,16 @@ public class DirectionalCharacterControllerWASDController : Controller
     protected override void UpdateLogic()
     {
         Vector3 moveDirection = GetCameraRelativeMovementDirection();
+
+        if (_character.InJumpProcess)
+            return;
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            _character.Jump();
+            return;
+        }
+
         _character.SetMovement(moveDirection);
         _character.SetRotation(moveDirection);
     }
@@ -24,7 +34,7 @@ public class DirectionalCharacterControllerWASDController : Controller
     private Vector3 GetInputDirection()
         => new Vector3(Input.GetAxisRaw(NameAxisX), 0, Input.GetAxisRaw(NameAxisZ));
 
-    public Vector3 GetCameraRelativeMovementDirection()
+    private Vector3 GetCameraRelativeMovementDirection()
     {
         Vector3 inputDirection = GetInputDirection();
 
