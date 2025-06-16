@@ -18,7 +18,7 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <WalkingSpeed>k__BackingField: 3
   <RunSpeed>k__BackingField: 7
-  <RotationSpeed>k__BackingField: 500
+  <RotationSpeed>k__BackingField: 700
   <TimeToSpawn>k__BackingField: 2
   <DeadDuration>k__BackingField: 5
   <MeleeAttack>k__BackingField: 10

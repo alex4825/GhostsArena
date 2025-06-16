@@ -33,7 +33,9 @@ public class PlayExample : MonoBehaviour
             new AgentEnemyAgroController(_enemyCharacter, _heroCharacter),
             new AgentRandomPatrolController(_enemyCharacter, _patrolRadius));
 
-        _heroController = new DirectionalCharacterControllerWASDController(_heroCharacter);
+        _heroController = new CompositeController(
+            new DirectionalCharacterWASDController(_heroCharacter),
+            new ShooterController(_heroCharacter));
 
         _agentEnemyController.IsEnabled = true;
         _heroController.IsEnabled = true;

@@ -533,6 +533,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3965252306837447694, guid: fc5a676d2c90b3d4f8a22e369c35950d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965252306837447694, guid: fc5a676d2c90b3d4f8a22e369c35950d,
+        type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4603156116648498359, guid: fc5a676d2c90b3d4f8a22e369c35950d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -582,6 +592,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137043069926549367, guid: fc5a676d2c90b3d4f8a22e369c35950d,
+        type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5317103314229426644, guid: fc5a676d2c90b3d4f8a22e369c35950d,
         type: 3}
