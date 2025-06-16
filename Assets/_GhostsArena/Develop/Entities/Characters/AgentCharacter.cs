@@ -12,9 +12,9 @@ public class AgentCharacter : Character, IAgentMovable
     private AgentMover _mover;
     private AgentJumper _jumper;
 
-    public Vector3 CurrentVelocity => _mover.CurrentVelocity;
+    public override Vector3 CurrentVelocity => _mover.CurrentVelocity;
     public Vector3 CurrentDestination => Agent.destination;
-    public bool InJumpProcess => _jumper.InProcess;
+    public override bool InJumpProcess => _jumper.InProcess;
 
     public void Initialize(AgentConfig config)
     {

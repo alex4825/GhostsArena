@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour, IDamagable, IHealthable, IKillable
+public abstract class Character : MonoBehaviour, IDamagable, IHealthable, IKillable, IMovable, IJumpable
 {
-    protected float WalkingSpeed;
-    protected float RunSpeed;
     protected float RotationSpeed;
 
     private float _deadDuration;
@@ -26,7 +24,11 @@ public abstract class Character : MonoBehaviour, IDamagable, IHealthable, IKilla
 
         private set { _health = value >= 0 ? value : 0; }
     }
+    public float WalkingSpeed { get; private set; }
+    public float RunSpeed { get; private set; }
     public Vector3 Position => transform.position;
+    public abstract Vector3 CurrentVelocity { get; }
+    public abstract bool InJumpProcess { get; }
 
     protected void Initialize(CharacterConfig config)
     {

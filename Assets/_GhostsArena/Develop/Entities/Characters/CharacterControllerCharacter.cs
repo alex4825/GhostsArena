@@ -6,8 +6,10 @@ public class CharacterControllerCharacter : Character, IDirectionalMovable
     private CharacterControllerMover _mover;
     private CharacterControllerJumper _jumper;
 
-    public Vector3 CurrentVelocity { get; private set; }
-    public bool InJumpProcess => _jumper.InProcess;
+    private Vector3 _currentVelocity;
+
+    public override Vector3 CurrentVelocity => _currentVelocity;
+    public override bool InJumpProcess => _jumper.InProcess;
 
     public void Initialize(MainHeroConfig config)
     {
@@ -19,7 +21,7 @@ public class CharacterControllerCharacter : Character, IDirectionalMovable
 
     public void SetMovement(Vector3 direction)
     {
-        CurrentVelocity = direction * RunSpeed;
+        _currentVelocity = direction * RunSpeed;
         _mover.Move(CurrentVelocity);
     }
 

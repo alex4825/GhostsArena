@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 2438505940080124746}
   - component: {fileID: 1236435466169836935}
   - component: {fileID: 5150371798215690389}
+  - component: {fileID: 8531086751364006040}
   m_Layer: 0
   m_Name: GhostEnemy
   m_TagString: Untagged
@@ -292,6 +293,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b47031789f7b74a91419a7d1a9d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &8531086751364006040
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981532379986748900}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 0.88
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.55, z: 0}
 --- !u!1 &2012365603447684830
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,6 +814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4968302064014025216}
   - component: {fileID: 4393192949394397602}
+  - component: {fileID: 6791912367585240953}
   m_Layer: 0
   m_Name: GhostVisual
   m_TagString: Untagged
@@ -836,6 +861,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6791912367585240953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8085173630196982067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7ecb6643fc2a94fad573a01999e4d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 4393192949394397602}
+  _character: {fileID: 5150371798215690389}
+  _healthBar: {fileID: 0}
+  _transitionDuration: 2
+  _damageEffectDuration: 1
 --- !u!1 &8237994181018073296
 GameObject:
   m_ObjectHideFlags: 0
