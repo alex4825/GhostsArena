@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable, IJumpable
@@ -14,6 +15,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
     public event Action<IKillable, float> Dead;
     public event Action Hit;
 
+    public Races Race { get; private set; }
     public bool IsAlive => Health > 0;
     public bool IsDead => Health <= 0;
     public float Lifetime { get; private set; } = 0;
@@ -26,14 +28,17 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
     }
     public float WalkingSpeed { get; private set; }
     public float RunSpeed { get; private set; }
+    public float MeleeAttack { get; private set; }
     public Vector3 Position => transform.position;
     public abstract Vector3 CurrentVelocity { get; }
     public abstract bool InJumpProcess { get; }
 
     protected void Initialize(CharacterConfig config)
     {
+        Race = config.Race;
         WalkingSpeed = config.WalkingSpeed;
         RunSpeed = config.RunSpeed;
+        MeleeAttack = config.MeleeAttack;
         RotationSpeed = config.RotationSpeed;
         _deadDuration = config.DeadDuration;
         MaxHealth = config.MaxHealth;

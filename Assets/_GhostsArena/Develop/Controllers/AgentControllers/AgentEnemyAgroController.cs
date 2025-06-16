@@ -3,22 +3,19 @@ using UnityEngine;
 public class AgentEnemyAgroController : AgentJumpableController
 {
     private AgentEnemyCharacter _enemyCharacter;
-    private Transform _target;
+    private IDamagable _target;
 
-    public AgentEnemyAgroController(AgentEnemyCharacter character, Transform target) : base(character)
+    public AgentEnemyAgroController(AgentEnemyCharacter character, IDamagable target) : base(character)
     {
         _enemyCharacter = character;
         _target = target;
     }
 
-    public override bool HasInput => GetDistanceBetween(_enemyCharacter.transform, _target) < _enemyCharacter.AgroRange;
+    public override bool HasInput => Vector3.Distance(_enemyCharacter.transform.position, _target.Position) < _enemyCharacter.AgroRange;
 
     protected override void UpdateMovement()
     {
-        if (GetDistanceBetween(_enemyCharacter.transform, _target) > _enemyCharacter.MinDistanceToTarget)
-            _enemyCharacter.SetDestination(_target.position);
+        if (Vector3.Distance(_enemyCharacter.transform.position, _target.Position) > _enemyCharacter.MinDistanceToTarget)
+            _enemyCharacter.SetDestination(_target.Position);
     }
-
-    private float GetDistanceBetween(Transform target1, Transform target2)
-        => Vector3.Distance(target1.position, target2.position);
 }

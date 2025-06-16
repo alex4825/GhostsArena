@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Image _barImage;
+    [SerializeField] private Gradient _gradient;
 
     private IDamagable _damagable;
     private float _maxWidth;
@@ -20,7 +21,12 @@ public class HealthBar : MonoBehaviour
     }
 
     public void RecalculateBarWidth()
-         => _barImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _damagable.Health * _healthWidthKoef);
+    {
+        _barImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _damagable.Health * _healthWidthKoef);
+
+        float healthPercent = _damagable.Health / _damagable.MaxHealth;
+        _barImage.color = _gradient.Evaluate(healthPercent);
+    }
 
     private void OnDestroy()
     {

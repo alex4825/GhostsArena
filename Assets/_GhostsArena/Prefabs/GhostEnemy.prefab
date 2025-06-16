@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 1236435466169836935}
   - component: {fileID: 5150371798215690389}
   - component: {fileID: 8531086751364006040}
+  - component: {fileID: 3377244984219879113}
   m_Layer: 0
   m_Name: GhostEnemy
   m_TagString: Untagged
@@ -273,7 +274,7 @@ NavMeshAgent:
   m_Acceleration: 999
   avoidancePriority: 50
   m_AngularSpeed: 999
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -316,6 +317,33 @@ CapsuleCollider:
   m_Height: 0.88
   m_Direction: 1
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!54 &3377244984219879113
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981532379986748900}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2012365603447684830
 GameObject:
   m_ObjectHideFlags: 0

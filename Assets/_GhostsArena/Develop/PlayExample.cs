@@ -30,7 +30,7 @@ public class PlayExample : MonoBehaviour
         _heroCharacter.Initialize(_mainHeroConfig);
 
         _agentEnemyController = new SwitcherController(
-            new AgentEnemyAgroController(_enemyCharacter, _heroCharacter.transform),
+            new AgentEnemyAgroController(_enemyCharacter, _heroCharacter),
             new AgentRandomPatrolController(_enemyCharacter, _patrolRadius));
 
         _heroController = new DirectionalCharacterControllerWASDController(_heroCharacter);

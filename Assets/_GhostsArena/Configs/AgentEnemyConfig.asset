@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 5150371798215690389, guid: 7cdd7b81aa43f6446b473a463c3de338,
     type: 3}
+  <Race>k__BackingField: 1
   <MaxHealth>k__BackingField: 100
   <WalkingSpeed>k__BackingField: 3
   <RunSpeed>k__BackingField: 7
   <RotationSpeed>k__BackingField: 500
   <TimeToSpawn>k__BackingField: 2
   <DeadDuration>k__BackingField: 5
+  <MeleeAttack>k__BackingField: 10
   <TimeForIdle>k__BackingField: 2
   <JumpSpeed>k__BackingField: 5
   <JumpCurve>k__BackingField:
@@ -47,4 +49,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <AgroRange>k__BackingField: 5
-  <MinDistanceToTarget>k__BackingField: 1
+  <MinDistanceToTarget>k__BackingField: 0.7
+  <AttackCooldown>k__BackingField: 1
