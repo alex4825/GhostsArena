@@ -1,6 +1,6 @@
 ﻿using System;
 
-public interface IKillable
+public interface IKillable : ITransformPosition
 {
     public event Action<IKillable, float> Dead;
 

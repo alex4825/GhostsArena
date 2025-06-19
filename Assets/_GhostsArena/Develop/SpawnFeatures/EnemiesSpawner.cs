@@ -12,7 +12,7 @@ public class EnemiesSpawner : MonoBehaviour
     private CharacterFactory<AgentEnemyCharacter> _enemyFactory;
     private Dictionary<AgentEnemyCharacter, Controller> _enemiesToController = new();
 
-    private IDamagable _target;
+    private IKillable _target;
 
     private void Update()
     {
@@ -23,7 +23,7 @@ public class EnemiesSpawner : MonoBehaviour
         }
     }
 
-    public void Activate(IDamagable target)
+    public void Activate(IKillable target)
     {
         _enemyFactory = new(_agentEnemyConfig.Prefab as AgentEnemyCharacter, transform);
 
