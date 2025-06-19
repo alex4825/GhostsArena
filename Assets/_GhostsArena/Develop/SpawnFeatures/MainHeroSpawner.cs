@@ -1,4 +1,6 @@
 using Cinemachine;
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class MainHeroSpawner : MonoBehaviour
@@ -12,14 +14,20 @@ public class MainHeroSpawner : MonoBehaviour
 
     private void Update()
     {
-        _heroController.IsEnabled = _heroCharacter.IsAlive;
-        _heroController?.Update();
+        if (_heroController != null)
+        {
+            _heroController.IsEnabled = _heroCharacter.IsAlive;
+            _heroController?.Update();
+        }
     }
 
-    public CharacterControllerCharacter Spawn()
+    public IEnumerator Spawn(Action<CharacterControllerCharacter> callbackOnSpawned)
     {
         _heroCharacter = Instantiate(_mainHeroConfig.Prefab as CharacterControllerCharacter, transform.position, Quaternion.identity);
         _heroCharacter.Initialize(_mainHeroConfig);
+        InitializeCamera();
+
+        yield return new WaitForSeconds(_heroCharacter.ShowDuration);
 
         _heroController = new CompositeController(
             new DirectionalCharacterWASDController(_heroCharacter),
@@ -27,9 +35,7 @@ public class MainHeroSpawner : MonoBehaviour
 
         _heroController.IsEnabled = true;
 
-        InitializeCamera();
-
-        return _heroCharacter;
+        callbackOnSpawned?.Invoke(_heroCharacter);
     }
 
     private void InitializeCamera()

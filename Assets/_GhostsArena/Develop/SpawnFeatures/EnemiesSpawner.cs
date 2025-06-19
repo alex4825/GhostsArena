@@ -10,7 +10,7 @@ public class EnemiesSpawner : MonoBehaviour
     [SerializeField] private float _spawnDuration;
 
     private CharacterFactory<AgentEnemyCharacter> _enemyFactory;
-    private Dictionary<AgentEnemyCharacter, Controller> _enemiesToController;
+    private Dictionary<AgentEnemyCharacter, Controller> _enemiesToController = new();
 
     private IDamagable _target;
 
@@ -26,7 +26,6 @@ public class EnemiesSpawner : MonoBehaviour
     public void Activate(IDamagable target)
     {
         _enemyFactory = new(_agentEnemyConfig.Prefab as AgentEnemyCharacter, transform);
-        _enemiesToController = new();
 
         _target = target;
 
@@ -41,6 +40,9 @@ public class EnemiesSpawner : MonoBehaviour
 
             AgentEnemyCharacter enemy = _enemyFactory.SpawnInRandom(_patrolRadius);
             enemy.Initialize(_agentEnemyConfig);
+
+            yield return new WaitForSeconds(enemy.ShowDuration);
+
             GenerateControllerFor(enemy);
         }
     }

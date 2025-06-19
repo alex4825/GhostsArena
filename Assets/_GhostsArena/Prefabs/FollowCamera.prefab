@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2470211569562190496}
   - component: {fileID: 371123635926219165}
-  - component: {fileID: 1898971414328300569}
   - component: {fileID: 124095108959531006}
   m_Layer: 0
   m_Name: FollowCamera
@@ -74,18 +73,6 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 4873125772241657443}
---- !u!114 &1898971414328300569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284918473877248387}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a107b16c32710d940916c187b8c732c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &124095108959531006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 64
   m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2
@@ -222,14 +209,14 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 10
+    Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 200
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1

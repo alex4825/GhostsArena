@@ -1,11 +1,9 @@
 using System;
-using System.Diagnostics;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable, IJumpable
 {
-    protected float RotationSpeed;
-
+    private float _rotationSpeed;
     private float _deadDuration;
     private float _health;
     private bool _isInDesroyProcess;
@@ -18,7 +16,8 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
     public Races Race { get; private set; }
     public bool IsAlive => Health > 0;
     public bool IsDead => Health <= 0;
-    public float Lifetime { get; private set; } = 0;
+    public float Lifetime { get; private set; } = 0; 
+    public float ShowDuration { get; private set; }
     public float MaxHealth { get; private set; }
     public float Health
     {
@@ -39,12 +38,13 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
         WalkingSpeed = config.WalkingSpeed;
         RunSpeed = config.RunSpeed;
         MeleeAttack = config.MeleeAttack;
-        RotationSpeed = config.RotationSpeed;
+        _rotationSpeed = config.RotationSpeed;
+        ShowDuration = config.ShowDuration;
         _deadDuration = config.DeadDuration;
         MaxHealth = config.MaxHealth;
         Health = MaxHealth;
 
-        _rotator = new DirectionalRotator(transform, RotationSpeed);
+        _rotator = new DirectionalRotator(transform, _rotationSpeed);
     }
 
     private void Update()
