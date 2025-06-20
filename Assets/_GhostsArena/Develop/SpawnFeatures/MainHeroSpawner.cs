@@ -29,7 +29,6 @@ public class MainHeroSpawner
     public IEnumerator Spawn(Action<CharacterControllerCharacter> callbackOnSpawned, Vector3 spawnPosition)
     {
         _heroCharacter = _charactersFactory.CreateMainHeroCharacter(_mainHeroConfig, spawnPosition);
-        InitializeCamera();
 
         yield return new WaitForSeconds(_heroCharacter.ShowDuration);
 
@@ -40,18 +39,4 @@ public class MainHeroSpawner
         callbackOnSpawned?.Invoke(_heroCharacter);
     }
 
-    private void InitializeCamera()
-    {
-        _mainHeroFollowCamera = Object.Instantiate(_mainHeroConfig.FollowCameraPrefab);
-        _mainHeroFollowCamera.Follow = _heroCharacter.transform;
-        _mainHeroFollowCamera.LookAt = _heroCharacter.transform;
-
-        _heroCharacter.Dead += OnHeroCharacterDead;
-    }
-
-    private void OnHeroCharacterDead(IKillable arg1, float arg2)
-    {
-        _mainHeroFollowCamera.Follow = null;
-        _mainHeroFollowCamera.LookAt = null;
-    }
 }

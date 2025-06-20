@@ -1,9 +1,11 @@
-using Unity.VisualScripting.FullSerializer;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class CharactersFactory
 {
+    CinemachineVirtualCamera _mainHeroFollowCamera;
+
     public CharacterControllerCharacter CreateMainHeroCharacter(MainHeroConfig config, Vector3 spawnPosition)
     {
         CharacterControllerCharacter character = Object.Instantiate(config.Prefab as CharacterControllerCharacter, spawnPosition, Quaternion.identity);
@@ -13,6 +15,8 @@ public class CharactersFactory
         Shooter shooter = new(character, config.BulletPrefab, config.DistantAttack, config.BulletLifetime, config.ShootForce);
 
         character.Initialize(config, mover, jumper, shooter);
+
+        InitializeCamera(character);
 
         return character;
     }
@@ -27,5 +31,20 @@ public class CharactersFactory
         character.Initialize(config, mover, jumper);
 
         return character;
+    }
+
+    private void InitializeCamera(CharacterControllerCharacter character)
+    {
+        CinemachineVirtualCamera mainHeroFollowCameraPrefab = Resources.Load<CinemachineVirtualCamera>("Prefabs/FollowCamera");
+        _mainHeroFollowCamera = Object.Instantiate(mainHeroFollowCameraPrefab);
+        _mainHeroFollowCamera.Follow = character.transform;
+        _mainHeroFollowCamera.LookAt = character.transform;
+
+        character.Dead += OnHeroCharacterDead;
+    }
+    private void OnHeroCharacterDead(IKillable arg1, float arg2)
+    {
+        _mainHeroFollowCamera.Follow = null;
+        _mainHeroFollowCamera.LookAt = null;
     }
 }

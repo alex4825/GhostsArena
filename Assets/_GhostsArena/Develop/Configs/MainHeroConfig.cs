@@ -5,7 +5,6 @@ using UnityEngine;
 public class MainHeroConfig : CharacterConfig
 {
     [field: SerializeField] public float JumpHeight { get; private set; } = 3;
-    [field: SerializeField] public CinemachineVirtualCamera FollowCameraPrefab { get; private set; }
     [field: SerializeField] public float DistantAttack { get; private set; } = 15;
     [field: SerializeField] public Bullet BulletPrefab { get; private set; }
     [field: SerializeField] public float ShootForce { get; private set; } = 50;

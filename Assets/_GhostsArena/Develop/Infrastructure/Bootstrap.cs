@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private MainHeroConfig _mainHeroConfig;
     [SerializeField] private Transform _mainHeroSpawnPoint;
     [SerializeField] private List<EnemiesSpawner> _enemiesSpawners;
     [SerializeField] private LoadingScreen _loadingScreen;
@@ -24,8 +23,9 @@ public class Bootstrap : MonoBehaviour
         _controllersUpdateService = new ControllersUpdateService();
         ControllersFactory controllersFactory = new ControllersFactory();
         CharactersFactory charactersFactory = new CharactersFactory();
+        MainHeroConfig mainHeroConfig = Resources.Load<MainHeroConfig>("Configs/MainHeroConfig");
 
-        MainHeroSpawner mainHeroSpawner = new(_controllersUpdateService, controllersFactory, charactersFactory, _mainHeroConfig);
+        MainHeroSpawner mainHeroSpawner = new(_controllersUpdateService, controllersFactory, charactersFactory, mainHeroConfig);
 
         foreach (var spawner in _enemiesSpawners)
             spawner.Initialize(_controllersUpdateService, controllersFactory, charactersFactory);
