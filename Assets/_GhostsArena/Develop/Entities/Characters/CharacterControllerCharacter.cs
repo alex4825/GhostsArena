@@ -16,19 +16,17 @@ public class CharacterControllerCharacter : Character, IDirectionalMovable, ISho
     public Transform ShootPoint => transform.Find(BulletSpawnPointName);
     public Collider SelfCollider => GetComponent<Collider>();
 
-    public void Initialize(MainHeroConfig config)
+    public void Initialize(
+        MainHeroConfig config,
+        CharacterControllerMover mover,
+        CharacterControllerJumper jumper, 
+        Shooter shooter)
     {
         base.Initialize(config);
 
-        _mover = new(GetComponent<CharacterController>());
-        _jumper = new(GetComponent<CharacterController>(), this, config.JumpHeight, this);
-
-        _shooter = new(
-            this,
-            config.BulletPrefab,  
-            config.DistantAttack, 
-            config.BulletLifetime, 
-            config.ShootForce);
+        _mover = mover;
+        _jumper = jumper;
+        _shooter = shooter;
     }
 
     public void SetMovement(Vector3 direction)

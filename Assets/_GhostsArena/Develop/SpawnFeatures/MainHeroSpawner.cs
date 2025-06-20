@@ -13,17 +13,21 @@ public class MainHeroSpawner : MonoBehaviour
 
     private ControllersUpdateService _controllersUpdateService;
     private ControllersFactory _controllersFactory;
+    private CharactersFactory _charactersFactory;
 
-    public void Initialize(ControllersUpdateService controllersUpdateService, ControllersFactory controllersFactory)
+    public void Initialize(
+        ControllersUpdateService controllersUpdateService,
+        ControllersFactory controllersFactory,
+        CharactersFactory charactersFactory)
     {
         _controllersUpdateService = controllersUpdateService;
         _controllersFactory = controllersFactory;
+        _charactersFactory = charactersFactory;
     }
 
     public IEnumerator Spawn(Action<CharacterControllerCharacter> callbackOnSpawned)
     {
-        _heroCharacter = Instantiate(_mainHeroConfig.Prefab as CharacterControllerCharacter, transform.position, Quaternion.identity);
-        _heroCharacter.Initialize(_mainHeroConfig);
+        _heroCharacter = _charactersFactory.CreateMainHeroCharacter(_mainHeroConfig, transform.position);
         InitializeCamera();
 
         yield return new WaitForSeconds(_heroCharacter.ShowDuration);

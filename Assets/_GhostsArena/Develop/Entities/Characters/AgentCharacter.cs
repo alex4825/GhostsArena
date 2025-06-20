@@ -5,9 +5,6 @@ using UnityEngine.AI;
 public class AgentCharacter : Character, IAgentMovable
 {
     protected NavMeshAgent Agent;
-    private float _jumpSpeed;
-    private float _timeForIdle;
-    private AnimationCurve _jumpCurve;
 
     private AgentMover _mover;
     private AgentJumper _jumper;
@@ -16,17 +13,14 @@ public class AgentCharacter : Character, IAgentMovable
     public Vector3 CurrentDestination => Agent.destination;
     public override bool InJumpProcess => _jumper.InProcess;
 
-    public void Initialize(AgentConfig config)
+    public void Initialize(AgentConfig config, AgentMover mover, AgentJumper jumper)
     {
         base.Initialize(config);
-        _jumpSpeed = config.JumpSpeed;
-        _jumpCurve = config.JumpCurve;
-        _timeForIdle = config.TimeForIdle;
 
         Agent = GetComponent<NavMeshAgent>();
 
-        _mover = new AgentMover(Agent, WalkingSpeed);
-        _jumper = new AgentJumper(_jumpSpeed, Agent, this, _jumpCurve);
+        _mover = mover;
+        _jumper = jumper;
     }
 
     public void SetDestination(Vector3 point) => _mover.SetDestination(point);

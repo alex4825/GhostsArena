@@ -8,9 +8,9 @@ public class AgentEnemyCharacter : AgentCharacter
     public float AgroRange { get; private set; }
     public float MinDistanceToTarget { get; private set; }
 
-    public void Initialize(AgentEnemyConfig config)
+    public void Initialize(AgentEnemyConfig config, AgentMover mover, AgentJumper jumper)
     {
-        base.Initialize(config);
+        base.Initialize(config, mover, jumper);
         _attackCooldown = config.AttackCooldown;
         _attackTimer = 0;
 
