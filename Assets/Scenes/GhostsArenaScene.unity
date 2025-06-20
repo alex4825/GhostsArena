@@ -1105,9 +1105,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1379198227}
-  - component: {fileID: 1379198228}
   m_Layer: 0
-  m_Name: MainHeroSpawner
+  m_Name: MainHeroSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,20 +1127,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1379198228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379198226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43782013756d2ed4d9f97273166aa40f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainHeroConfig: {fileID: 11400000, guid: 4adb7a627cc947644bdb17aeae082fc2, type: 2}
-  _heroSpawnPoint: {fileID: 0}
 --- !u!1 &1417119274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55222c98569eb9c4c83067a77782d8a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainHeroSpawner: {fileID: 1379198228}
+  _mainHeroConfig: {fileID: 11400000, guid: 4adb7a627cc947644bdb17aeae082fc2, type: 2}
+  _mainHeroSpawnPoint: {fileID: 1379198227}
   _enemiesSpawners:
   - {fileID: 954009150}
   _loadingScreen: {fileID: 991587807}

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private MainHeroSpawner _mainHeroSpawner;
+    [SerializeField] private MainHeroConfig _mainHeroConfig;
+    [SerializeField] private Transform _mainHeroSpawnPoint;
     [SerializeField] private List<EnemiesSpawner> _enemiesSpawners;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private ConfirmPopup _confirmPopup;
@@ -24,7 +25,7 @@ public class Bootstrap : MonoBehaviour
         ControllersFactory controllersFactory = new ControllersFactory();
         CharactersFactory charactersFactory = new CharactersFactory();
 
-        _mainHeroSpawner.Initialize(_controllersUpdateService, controllersFactory, charactersFactory);
+        MainHeroSpawner mainHeroSpawner = new(_controllersUpdateService, controllersFactory, charactersFactory, _mainHeroConfig);
 
         foreach (var spawner in _enemiesSpawners)
             spawner.Initialize(_controllersUpdateService, controllersFactory, charactersFactory);
@@ -38,7 +39,7 @@ public class Bootstrap : MonoBehaviour
 
         CharacterControllerCharacter mainHeroCharacter = new();
 
-        yield return StartCoroutine(_mainHeroSpawner.Spawn(hero => mainHeroCharacter = hero));
+        yield return StartCoroutine(mainHeroSpawner.Spawn(hero => mainHeroCharacter = hero, _mainHeroSpawnPoint.position));
 
         yield return _confirmPopup.WaitConfirm(KeyCode.F);
 
