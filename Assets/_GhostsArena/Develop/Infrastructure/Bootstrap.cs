@@ -10,6 +10,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private ConfirmPopup _confirmPopup;
 
     private ControllersUpdateService _controllersUpdateService;
+    private GameMode _gameMode;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class Bootstrap : MonoBehaviour
         ControllersFactory controllersFactory = new ControllersFactory();
         CharactersFactory charactersFactory = new CharactersFactory();
         MainHeroConfig mainHeroConfig = Resources.Load<MainHeroConfig>("Configs/MainHeroConfig");
+        LevelConfig levelConfig = Resources.Load<LevelConfig>("Configs/LevelConfig");
 
         MainHeroSpawner mainHeroSpawner = new(_controllersUpdateService, controllersFactory, charactersFactory, mainHeroConfig);
 
@@ -41,16 +43,19 @@ public class Bootstrap : MonoBehaviour
 
         yield return StartCoroutine(mainHeroSpawner.Spawn(hero => mainHeroCharacter = hero, _mainHeroSpawnPoint.position));
 
+        _gameMode = new(levelConfig, mainHeroCharacter, _enemiesSpawners);
+
         yield return _confirmPopup.WaitConfirm(KeyCode.F);
 
         _confirmPopup.Hide();
 
-        foreach (var spawner in _enemiesSpawners)
-            spawner.Activate(mainHeroCharacter);
+        _gameMode.Start();
+
     }
 
     private void Update()
     {
         _controllersUpdateService?.Update();
+        _gameMode?.Update();
     }
 }

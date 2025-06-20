@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class EnemiesSpawner : MonoBehaviour
     private ControllersFactory _controllersFactory;
 
     private IKillable _target;
+    private Coroutine _spawnProcess;
+
+    public Action<AgentEnemyCharacter> Spawned;
     
     public void Initialize(
         ControllersUpdateService controllersUpdateService,
@@ -24,11 +28,17 @@ public class EnemiesSpawner : MonoBehaviour
         _charactersFactory = charactersFactory;
     }
 
-    public void Activate(IKillable target)
+    public void ActivateSpawnProcess(IKillable target)
     {
         _target = target;
 
-        StartCoroutine(SpawnProcess());
+        _spawnProcess = StartCoroutine(SpawnProcess());
+    }
+
+    public void StopSpawnProcess()
+    {
+        _target = null;
+        StopCoroutine(_spawnProcess);
     }
 
     private IEnumerator SpawnProcess()
@@ -40,6 +50,8 @@ public class EnemiesSpawner : MonoBehaviour
             AgentEnemyCharacter enemy = _charactersFactory.CreateEnemyCharacter(_agentEnemyConfig, GetRandomSpawnPosition());
 
             yield return new WaitForSeconds(enemy.ShowDuration);
+
+            Spawned?.Invoke(enemy);
 
             Controller enemyController = _controllersFactory.CreateEnemyController(enemy, _target, _agentEnemyConfig.PatrolRadius);
 

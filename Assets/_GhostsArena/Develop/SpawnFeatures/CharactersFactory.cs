@@ -1,10 +1,11 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.TextCore.Text;
 
 public class CharactersFactory
 {
-    CinemachineVirtualCamera _mainHeroFollowCamera;
+    private CinemachineVirtualCamera _mainHeroFollowCamera;
 
     public CharacterControllerCharacter CreateMainHeroCharacter(MainHeroConfig config, Vector3 spawnPosition)
     {
@@ -42,9 +43,11 @@ public class CharactersFactory
 
         character.Dead += OnHeroCharacterDead;
     }
-    private void OnHeroCharacterDead(IKillable arg1, float arg2)
+    private void OnHeroCharacterDead(IKillable character, float arg2)
     {
         _mainHeroFollowCamera.Follow = null;
         _mainHeroFollowCamera.LookAt = null;
+
+        character.Dead -= OnHeroCharacterDead;
     }
 }

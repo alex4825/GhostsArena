@@ -21,6 +21,9 @@ public class AgentEnemyCharacter : AgentCharacter
 
     private void OnTriggerStay(Collider other)
     {
+        if (IsDead)
+            return;
+
         if (other.gameObject.TryGetComponent(out Character collidedCharacter) == false)
             return;
 

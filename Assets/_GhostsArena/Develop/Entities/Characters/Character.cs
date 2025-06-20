@@ -11,12 +11,13 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
     private DirectionalRotator _rotator;
 
     public event Action<IKillable, float> Dead;
+    public event Action<IKillable> KilledBySomeone;
     public event Action Hit;
 
     public Races Race { get; private set; }
     public bool IsAlive => Health > 0;
     public bool IsDead => Health <= 0;
-    public float Lifetime { get; private set; } = 0; 
+    public float Lifetime { get; private set; } = 0;
     public float ShowDuration { get; private set; }
     public float MaxHealth { get; private set; }
     public float Health
@@ -73,12 +74,18 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
 
         if (damage > 0)
             Health -= damage;
+
+        if (IsDead)
+            KilledBySomeone?.Invoke(this);
     }
 
     public virtual void Kill()
     {
-        Dead?.Invoke(this, _deadDuration);
-        Destroy(gameObject, _deadDuration);
-        _isInDesroyProcess = true;
+        if (_isInDesroyProcess == false)
+        {
+            Dead?.Invoke(this, _deadDuration);
+            Destroy(gameObject, _deadDuration);
+            _isInDesroyProcess = true;
+        }
     }
 }
