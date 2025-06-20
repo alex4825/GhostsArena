@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class CharacterView : MonoBehaviour
+public class CharacterView : MonoBehaviour, IInitializable
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private Character _character;
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private float _damageEffectDuration;
 
@@ -14,23 +13,33 @@ public class CharacterView : MonoBehaviour
     private const string DissolveKey = "_DissolveAdge";
     private const string DamageStranghtKey = "_DamageStranght";
 
+    private Character _character;
     private ShortEffectView _shortEffectView;
 
-    private float _characterMaxSpeed => _character.RunSpeed;
+    private bool _isInit;
 
-    private void Start()
+    private float CharacterMaxSpeed => _character.RunSpeed;
+
+    public void Initialize()
     {
+        _character = GetComponentInParent<Character>();
+
         _shortEffectView = new ShortEffectView(GetComponentsInChildren<Renderer>(), this);
         _healthBar.Initialize(_character);
         _shortEffectView.PlayDecreaseEffect(DissolveKey, _character.ShowDuration);
 
         _character.Hit += OnCharacterHit;
         _character.Dead += OnCharacterDead;
+
+        _isInit = true;
     }
 
     private void Update()
     {
-        _animator.SetFloat(SpeedKey, _character.CurrentVelocity.magnitude / _characterMaxSpeed);
+        if (_isInit)
+            return;
+
+        _animator.SetFloat(SpeedKey, _character.CurrentVelocity.magnitude / CharacterMaxSpeed);
     }
 
     private void OnDestroy()

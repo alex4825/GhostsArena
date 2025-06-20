@@ -9,16 +9,12 @@ public class MainHeroSpawner : MonoBehaviour
     [SerializeField] private Transform _heroSpawnPoint;
 
     private CharacterControllerCharacter _heroCharacter;
-    private Controller _heroController;
     private CinemachineVirtualCamera _mainHeroFollowCamera;
+    private ControllersUpdateService _controllersUpdateService;
 
-    private void Update()
+    public void Initialize(ControllersUpdateService controllersUpdateService)
     {
-        if (_heroController != null)
-        {
-            _heroController.IsEnabled = _heroCharacter.IsAlive;
-            _heroController?.Update();
-        }
+        _controllersUpdateService = controllersUpdateService;
     }
 
     public IEnumerator Spawn(Action<CharacterControllerCharacter> callbackOnSpawned)
@@ -29,11 +25,11 @@ public class MainHeroSpawner : MonoBehaviour
 
         yield return new WaitForSeconds(_heroCharacter.ShowDuration);
 
-        _heroController = new CompositeController(
+        Controller heroController = new CompositeController(
             new DirectionalCharacterWASDController(_heroCharacter),
             new ShooterController(_heroCharacter));
 
-        _heroController.IsEnabled = true;
+        _controllersUpdateService.Add(_heroCharacter, heroController);
 
         callbackOnSpawned?.Invoke(_heroCharacter);
     }
@@ -43,5 +39,13 @@ public class MainHeroSpawner : MonoBehaviour
         _mainHeroFollowCamera = Instantiate(_mainHeroConfig.FollowCameraPrefab);
         _mainHeroFollowCamera.Follow = _heroCharacter.transform;
         _mainHeroFollowCamera.LookAt = _heroCharacter.transform;
+
+        _heroCharacter.Dead += OnHeroCharacterDead;
+    }
+
+    private void OnHeroCharacterDead(IKillable arg1, float arg2)
+    {
+        _mainHeroFollowCamera.Follow = null;
+        _mainHeroFollowCamera.LookAt = null;
     }
 }

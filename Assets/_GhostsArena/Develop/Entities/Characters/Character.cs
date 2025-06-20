@@ -45,6 +45,9 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
         Health = MaxHealth;
 
         _rotator = new DirectionalRotator(transform, _rotationSpeed);
+
+        foreach (var initializable in GetComponentsInChildren<IInitializable>())
+            initializable.Initialize();
     }
 
     private void Update()

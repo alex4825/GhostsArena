@@ -10,17 +10,13 @@ public class EnemiesSpawner : MonoBehaviour
     [SerializeField] private float _spawnDuration;
 
     private CharacterFactory<AgentEnemyCharacter> _enemyFactory;
-    private Dictionary<AgentEnemyCharacter, Controller> _enemiesToController = new();
+    private ControllersUpdateService _controllersUpdateService;
 
     private IKillable _target;
 
-    private void Update()
+    public void Initialize(ControllersUpdateService controllersUpdateService)
     {
-        foreach (var enemyToController in _enemiesToController)
-        {
-            enemyToController.Value.IsEnabled = enemyToController.Key.IsAlive;
-            enemyToController.Value.Update();
-        }
+        _controllersUpdateService = controllersUpdateService;
     }
 
     public void Activate(IKillable target)
@@ -53,18 +49,6 @@ public class EnemiesSpawner : MonoBehaviour
             new AgentEnemyAgroController(enemy, _target),
             new AgentRandomPatrolController(enemy, _patrolRadius));
 
-
-        _enemiesToController.Add(enemy, enemyController);
-        enemyController.IsEnabled = true;
-
-        enemy.Dead += OnEnemyDead;
-    }
-
-    private void OnEnemyDead(IKillable enemy, float deadDuration)
-    {
-        _enemiesToController[enemy as AgentEnemyCharacter].IsEnabled = false;
-        _enemiesToController.Remove(enemy as AgentEnemyCharacter);
-
-        enemy.Dead -= OnEnemyDead;
+        _controllersUpdateService.Add(enemy, enemyController);
     }
 }
