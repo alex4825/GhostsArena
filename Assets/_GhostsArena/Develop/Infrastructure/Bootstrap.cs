@@ -21,11 +21,12 @@ public class Bootstrap : MonoBehaviour
         _loadingScreen.Show();
 
         _controllersUpdateService = new ControllersUpdateService();
+        ControllersFactory controllersFactory = new ControllersFactory();
 
-        _mainHeroSpawner.Initialize(_controllersUpdateService);
+        _mainHeroSpawner.Initialize(_controllersUpdateService, controllersFactory);
 
         foreach (var spawner in _enemiesSpawners)
-            spawner.Initialize(_controllersUpdateService);
+            spawner.Initialize(_controllersUpdateService, controllersFactory);
 
         yield return new WaitForSeconds(2f);
 

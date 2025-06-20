@@ -11,12 +11,14 @@ public class EnemiesSpawner : MonoBehaviour
 
     private CharacterFactory<AgentEnemyCharacter> _enemyFactory;
     private ControllersUpdateService _controllersUpdateService;
+    private ControllersFactory _controllersFactory;
 
     private IKillable _target;
-
-    public void Initialize(ControllersUpdateService controllersUpdateService)
+    
+    public void Initialize(ControllersUpdateService controllersUpdateService, ControllersFactory controllersFactory)
     {
         _controllersUpdateService = controllersUpdateService;
+        _controllersFactory = controllersFactory;
     }
 
     public void Activate(IKillable target)
@@ -39,16 +41,9 @@ public class EnemiesSpawner : MonoBehaviour
 
             yield return new WaitForSeconds(enemy.ShowDuration);
 
-            GenerateControllerFor(enemy);
+            Controller enemyController = _controllersFactory.CreateEnemyController(enemy, _target, _patrolRadius);
+
+            _controllersUpdateService.Add(enemy, enemyController);
         }
-    }
-
-    private void GenerateControllerFor(AgentEnemyCharacter enemy)
-    {
-        Controller enemyController = new SwitcherController(
-            new AgentEnemyAgroController(enemy, _target),
-            new AgentRandomPatrolController(enemy, _patrolRadius));
-
-        _controllersUpdateService.Add(enemy, enemyController);
     }
 }

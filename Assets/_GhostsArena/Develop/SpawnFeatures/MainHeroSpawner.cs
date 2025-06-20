@@ -10,11 +10,14 @@ public class MainHeroSpawner : MonoBehaviour
 
     private CharacterControllerCharacter _heroCharacter;
     private CinemachineVirtualCamera _mainHeroFollowCamera;
-    private ControllersUpdateService _controllersUpdateService;
 
-    public void Initialize(ControllersUpdateService controllersUpdateService)
+    private ControllersUpdateService _controllersUpdateService;
+    private ControllersFactory _controllersFactory;
+
+    public void Initialize(ControllersUpdateService controllersUpdateService, ControllersFactory controllersFactory)
     {
         _controllersUpdateService = controllersUpdateService;
+        _controllersFactory = controllersFactory;
     }
 
     public IEnumerator Spawn(Action<CharacterControllerCharacter> callbackOnSpawned)
@@ -25,9 +28,7 @@ public class MainHeroSpawner : MonoBehaviour
 
         yield return new WaitForSeconds(_heroCharacter.ShowDuration);
 
-        Controller heroController = new CompositeController(
-            new DirectionalCharacterWASDController(_heroCharacter),
-            new ShooterController(_heroCharacter));
+        Controller heroController = _controllersFactory.CreateMainHeroController(_heroCharacter);
 
         _controllersUpdateService.Add(_heroCharacter, heroController);
 
