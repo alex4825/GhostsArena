@@ -19,7 +19,19 @@ public class CharacterFactory<TCharacter> where TCharacter : Character
 
     public TCharacter SpawnInRandom(float radius)
     {
-        Vector3 offset = RandomPointer.GetRandomPointInRadius(radius);
+        float maxColliderRadius = _characterPrefab.GetComponent<Collider>().bounds.extents.magnitude;
+        int maxAttempts = 10;
+        bool hasIntersections;
+        int attempt = 0;
+        Vector3 offset;
+
+        do
+        {
+            attempt++;
+            offset = RandomPointer.GetRandomPointInRadius(radius);
+            hasIntersections = Physics.CheckSphere(_spawnPoint.position + offset, maxColliderRadius);
+        }
+        while (hasIntersections || attempt < maxAttempts);
 
         TCharacter character = Object.Instantiate(_characterPrefab, _spawnPoint.position + offset, Quaternion.identity);
 
