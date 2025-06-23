@@ -48,10 +48,10 @@ public class CharacterView : MonoBehaviour, IInitializable
         _character.Dead -= OnCharacterDead;
     }
 
-    private void OnCharacterDead(IKillable killable, float deadDuration)
+    private void OnCharacterDead(IKillable killable)
     {
         _animator.SetTrigger(DieKey);
-        _shortEffectView.PlayIncreaseEffect(DissolveKey, deadDuration);
+        _shortEffectView.PlayIncreaseEffect(DissolveKey, killable.DeadDuration);
         _healthBar.gameObject.SetActive(false);
     }
 

@@ -17,7 +17,7 @@ public class EnemiesSpawner : MonoBehaviour
     private Coroutine _spawnProcess;
 
     public Action<AgentEnemyCharacter> Spawned;
-    
+
     public void Initialize(
         ControllersUpdateService controllersUpdateService,
         ControllersFactory controllersFactory,
@@ -49,9 +49,9 @@ public class EnemiesSpawner : MonoBehaviour
 
             AgentEnemyCharacter enemy = _charactersFactory.CreateEnemyCharacter(_agentEnemyConfig, GetRandomSpawnPosition());
 
-            yield return new WaitForSeconds(enemy.ShowDuration);
-
             Spawned?.Invoke(enemy);
+
+            yield return new WaitForSeconds(enemy.ShowDuration);
 
             Controller enemyController = _controllersFactory.CreateEnemyController(enemy, _target, _agentEnemyConfig.PatrolRadius);
 

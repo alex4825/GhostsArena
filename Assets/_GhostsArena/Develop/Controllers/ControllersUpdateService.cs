@@ -20,7 +20,7 @@ public class ControllersUpdateService
         }
     }
 
-    private void OnCharacterDead(IKillable character, float deadDuration)
+    private void OnCharacterDead(IKillable character)
     {
         _charactersToControllers[character as Character].IsEnabled = false;
         _charactersToControllers.Remove(character as Character);

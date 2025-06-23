@@ -10,11 +10,12 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private ConfirmPopup _confirmPopup;
 
     private ControllersUpdateService _controllersUpdateService;
-    private GameMode _gameMode;
+    private GameplayCycle _gameplayCycle;
 
     private void Awake()
     {
         StartCoroutine(StartProcess());
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private IEnumerator StartProcess()
@@ -36,26 +37,19 @@ public class Bootstrap : MonoBehaviour
 
         _loadingScreen.Hide();
 
-        _confirmPopup.Show();
-        _confirmPopup.ShowMessage($"Press {KeyCode.F.ToString()} for begin");
+        _gameplayCycle = new GameplayCycle(mainHeroSpawner, mainHeroConfig, levelConfig, _confirmPopup, this, _enemiesSpawners, _mainHeroSpawnPoint);
 
-        CharacterControllerCharacter mainHeroCharacter = new();
-
-        yield return StartCoroutine(mainHeroSpawner.Spawn(hero => mainHeroCharacter = hero, _mainHeroSpawnPoint.position));
-
-        _gameMode = new(levelConfig, mainHeroCharacter, _enemiesSpawners);
-
-        yield return _confirmPopup.WaitConfirm(KeyCode.F);
-
-        _confirmPopup.Hide();
-
-        _gameMode.Start();
-
+        yield return _gameplayCycle.Launch();
     }
 
     private void Update()
     {
         _controllersUpdateService?.Update();
-        _gameMode?.Update();
+        _gameplayCycle?.Update();
+    }
+
+    private void OnDestroy()
+    {
+        _gameplayCycle?.Dispose();
     }
 }

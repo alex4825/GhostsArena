@@ -1,7 +1,6 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.TextCore.Text;
 
 public class CharactersFactory
 {
@@ -43,7 +42,7 @@ public class CharactersFactory
 
         character.Dead += OnHeroCharacterDead;
     }
-    private void OnHeroCharacterDead(IKillable character, float arg2)
+    private void OnHeroCharacterDead(IKillable character)
     {
         _mainHeroFollowCamera.Follow = null;
         _mainHeroFollowCamera.LookAt = null;

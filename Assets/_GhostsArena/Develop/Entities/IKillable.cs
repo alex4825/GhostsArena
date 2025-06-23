@@ -2,9 +2,11 @@
 
 public interface IKillable : ITransformPosition
 {
-    public event Action<IKillable, float> Dead;
+    public event Action<IKillable> Dead;
 
     public event Action<IKillable> KilledBySomeone;
+
+    float DeadDuration { get; }
 
     bool IsDead { get; }
 

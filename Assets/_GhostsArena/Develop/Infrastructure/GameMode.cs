@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameMode
@@ -7,6 +9,7 @@ public class GameMode
     private LevelConfig _levelConfig;
     private CharacterControllerCharacter _mainHero;
     private List<EnemiesSpawner> _enemySpawners;
+    private MonoBehaviour _context;
 
     private List<AgentEnemyCharacter> _enemies = new();
 
@@ -22,11 +25,12 @@ public class GameMode
     private Func<bool> WinCondition;
     private Func<bool> DefeatCondition;
 
-    public GameMode(LevelConfig levelConfig, CharacterControllerCharacter mainHero, List<EnemiesSpawner> enemySpawners)
+    public GameMode(LevelConfig levelConfig, CharacterControllerCharacter mainHero, List<EnemiesSpawner> enemySpawners, MonoBehaviour context)
     {
         _levelConfig = levelConfig;
         _mainHero = mainHero;
         _enemySpawners = enemySpawners;
+        _context = context;
     }
 
     public void Start()
@@ -53,39 +57,18 @@ public class GameMode
 
         if (WinCondition?.Invoke() == true)
         {
-            ProcessWin();
-            Win?.Invoke();
+            _context.StartCoroutine(ProcessEndGame(Win));
+            return;
         }
 
         if (DefeatCondition?.Invoke() == true)
         {
-            ProcessDefeat();
-            Defeat?.Invoke();
+            _context.StartCoroutine(ProcessEndGame(Defeat));
+            return;
         }
     }
 
-    private void ProcessWin()
-    {
-        Debug.Log($"You win!");
-
-        for (int i = 0; i < _enemies.Count; i++)
-            _enemies[i].Kill();
-
-        _enemies.Clear();
-
-        ProcessEndGame();
-    }
-
-    private void ProcessDefeat()
-    {
-        Debug.Log($"You lose.");
-
-        _mainHero.Kill();
-
-        ProcessEndGame();
-    }
-
-    private void ProcessEndGame()
+    private IEnumerator ProcessEndGame(Action endGameEvent)
     {
         Debug.Log($"Time passed: {_playTimer:F2}. Enemy killed: {_killedEnemies}. Enemy spawned: {_spawnedEnemies}.");
 
@@ -99,6 +82,22 @@ public class GameMode
         _killedEnemies = 0;
         _spawnedEnemies = 0;
         _playTimer = 0;
+
+        float timeToDestroyAllEntities = _enemies.Select(enemy => enemy.DeadDuration).Max();
+
+        if (_mainHero.DeadDuration > timeToDestroyAllEntities)
+            timeToDestroyAllEntities = _mainHero.DeadDuration;
+
+        for (int i = 0; i < _enemies.Count; i++)
+            _enemies[i].Kill();
+
+        _enemies.Clear();
+
+        _mainHero.Kill();
+
+        yield return new WaitForSeconds(timeToDestroyAllEntities);
+
+        endGameEvent?.Invoke();
     }
 
     private void OnEnemySpawned(AgentEnemyCharacter enemy)

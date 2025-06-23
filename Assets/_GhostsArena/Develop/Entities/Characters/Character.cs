@@ -4,13 +4,12 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable, IJumpable
 {
     private float _rotationSpeed;
-    private float _deadDuration;
     private float _health;
     private bool _isInDesroyProcess;
 
     private DirectionalRotator _rotator;
 
-    public event Action<IKillable, float> Dead;
+    public event Action<IKillable> Dead;
     public event Action<IKillable> KilledBySomeone;
     public event Action Hit;
 
@@ -18,6 +17,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
     public bool IsAlive => Health > 0;
     public bool IsDead => Health <= 0;
     public float Lifetime { get; private set; } = 0;
+    public float DeadDuration { get; private set; }
     public float ShowDuration { get; private set; }
     public float MaxHealth { get; private set; }
     public float Health
@@ -41,7 +41,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
         MeleeAttack = config.MeleeAttack;
         _rotationSpeed = config.RotationSpeed;
         ShowDuration = config.ShowDuration;
-        _deadDuration = config.DeadDuration;
+        DeadDuration = config.DeadDuration;
         MaxHealth = config.MaxHealth;
         Health = MaxHealth;
 
@@ -83,8 +83,8 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
     {
         if (_isInDesroyProcess == false)
         {
-            Dead?.Invoke(this, _deadDuration);
-            Destroy(gameObject, _deadDuration);
+            Dead?.Invoke(this);
+            Destroy(gameObject, DeadDuration);
             _isInDesroyProcess = true;
         }
     }
