@@ -30,6 +30,11 @@ public class MainHeroSpawner
     {
         _heroCharacter = _charactersFactory.CreateMainHeroCharacter(_mainHeroConfig, spawnPosition);
 
+        if (_mainHeroFollowCamera == null)
+            InitializeCamera();
+        else
+            ChooseCameraTarget(_heroCharacter.transform);
+
         yield return new WaitForSeconds(_heroCharacter.ShowDuration);
 
         Controller heroController = _controllersFactory.CreateMainHeroController(_heroCharacter);
@@ -39,4 +44,25 @@ public class MainHeroSpawner
         callbackOnSpawned?.Invoke(_heroCharacter);
     }
 
+    private void InitializeCamera()
+    {
+        CinemachineVirtualCamera mainHeroFollowCameraPrefab = Resources.Load<CinemachineVirtualCamera>("Prefabs/FollowCamera");
+        _mainHeroFollowCamera = Object.Instantiate(mainHeroFollowCameraPrefab);
+        ChooseCameraTarget(_heroCharacter.transform);
+
+        _heroCharacter.Dead += OnHeroCharacterDead;
+    }
+
+    private void OnHeroCharacterDead(IKillable character)
+    {
+        ChooseCameraTarget(null);
+
+        character.Dead -= OnHeroCharacterDead;
+    }
+
+    private void ChooseCameraTarget(Transform target)
+    {
+        _mainHeroFollowCamera.Follow = target;
+        _mainHeroFollowCamera.LookAt = target;
+    }
 }
