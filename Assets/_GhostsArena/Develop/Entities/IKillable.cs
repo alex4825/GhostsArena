@@ -4,7 +4,7 @@ public interface IKillable : ITransformPosition
 {
     public event Action<IKillable> Dead;
 
-    public event Action<IKillable> KilledBySomeone;
+    public event Action<IKillable> Killed;
 
     float DeadDuration { get; }
 

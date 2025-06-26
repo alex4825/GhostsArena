@@ -10,7 +10,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
     private DirectionalRotator _rotator;
 
     public event Action<IKillable> Dead;
-    public event Action<IKillable> KilledBySomeone;
+    public event Action<IKillable> Killed;
     public event Action Hit;
 
     public Races Race { get; private set; }
@@ -76,7 +76,7 @@ public abstract class Character : MonoBehaviour, IDamagable, IKillable, IMovable
             Health -= damage;
 
         if (IsDead)
-            KilledBySomeone?.Invoke(this);
+            Killed?.Invoke(this);
     }
 
     public virtual void Kill()

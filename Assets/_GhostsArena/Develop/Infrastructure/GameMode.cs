@@ -96,20 +96,20 @@ public class GameMode
     {
         _spawnedEnemies++;
         _enemies.Add(enemy);
-        enemy.KilledBySomeone += OnEnemyKilledByHero;
+        enemy.Killed += OnEnemyKilled;
     }
 
-    private void OnEnemyKilledByHero(IKillable enemy)
+    private void OnEnemyKilled(IKillable enemy)
     {
         _killedEnemies++;
         _enemies.Remove(enemy as AgentEnemyCharacter);
-        enemy.KilledBySomeone -= OnEnemyKilledByHero;
+        enemy.Killed -= OnEnemyKilled;
     }
 
     private void SetWinCondition()
     {
         switch (_levelConfig.WinCondition)
-        {
+        { 
             case WinConditions.SurviveThroughTime:
                 WinCondition = () => _playTimer >= _levelConfig.TimeToWin;
                 break;
