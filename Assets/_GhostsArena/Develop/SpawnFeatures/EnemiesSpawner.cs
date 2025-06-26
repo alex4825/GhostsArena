@@ -61,7 +61,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPosition()
     {
-        Collider enemyCollider = _agentEnemyConfig.Prefab.GetComponent<Collider>();
+        Collider enemyCollider = _agentEnemyConfig.AgentEnemyCharacterPrefab.GetComponent<Collider>();
 
         float maxColliderRadius = enemyCollider.bounds.extents.magnitude;
         int maxAttempts = 10;

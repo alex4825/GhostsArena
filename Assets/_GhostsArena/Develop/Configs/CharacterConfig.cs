@@ -3,7 +3,6 @@ using UnityEngine;
 //[CreateAssetMenu(menuName = "Configs/Gameplay/CharacterConfig", fileName = "CharacterConfig")]
 public class CharacterConfig: ScriptableObject
 {
-    [field: SerializeField] public Character Prefab { get; private set; }
     [field: SerializeField] public Races Race { get; private set; }
     [field: SerializeField] public float MaxHealth { get; private set; } = 100f;
     [field: SerializeField] public float WalkingSpeed { get; private set; } = 3f;
