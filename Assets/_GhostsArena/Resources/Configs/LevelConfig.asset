@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnemiesSpawnDuration>k__BackingField: 5
   <MainHeroStartPosition>k__BackingField: {x: 0, y: 0, z: 0}
-  <WinCondition>k__BackingField: 0
-  <TimeToWin>k__BackingField: 15
+  <WinCondition>k__BackingField: 1
+  <TimeToWin>k__BackingField: 30
   <KillEnemiesToWin>k__BackingField: 4
-  <DefeatCondition>k__BackingField: 0
+  <DefeatCondition>k__BackingField: 1
   <MaxSpawnedEnemies>k__BackingField: 6

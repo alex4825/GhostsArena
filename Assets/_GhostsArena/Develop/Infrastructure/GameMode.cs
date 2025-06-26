@@ -25,12 +25,11 @@ public class GameMode
     private Func<bool> WinCondition;
     private Func<bool> DefeatCondition;
 
-    public GameMode(LevelConfig levelConfig, CharacterControllerCharacter mainHero, List<EnemiesSpawner> enemySpawners, MonoBehaviour context)
+    public GameMode(LevelConfig levelConfig, CharacterControllerCharacter mainHero, List<EnemiesSpawner> enemySpawners)
     {
         _levelConfig = levelConfig;
         _mainHero = mainHero;
         _enemySpawners = enemySpawners;
-        _context = context;
     }
 
     public void Start()
@@ -57,18 +56,18 @@ public class GameMode
 
         if (WinCondition?.Invoke() == true)
         {
-            _context.StartCoroutine(ProcessEndGame(Win));
+            ProcessEndGame(Win);
             return;
         }
 
         if (DefeatCondition?.Invoke() == true)
         {
-            _context.StartCoroutine(ProcessEndGame(Defeat));
+            ProcessEndGame(Defeat);
             return;
         }
     }
 
-    private IEnumerator ProcessEndGame(Action endGameEvent)
+    private void ProcessEndGame(Action endGameEvent)
     {
         Debug.Log($"Time passed: {_playTimer:F2}. Enemy killed: {_killedEnemies}. Enemy spawned: {_spawnedEnemies}.");
 
@@ -83,19 +82,12 @@ public class GameMode
         _spawnedEnemies = 0;
         _playTimer = 0;
 
-        float timeToDestroyAllEntities = _enemies.Select(enemy => enemy.DeadDuration).Max();
-
-        if (_mainHero.DeadDuration > timeToDestroyAllEntities)
-            timeToDestroyAllEntities = _mainHero.DeadDuration;
-
         for (int i = 0; i < _enemies.Count; i++)
             _enemies[i].Kill();
 
         _enemies.Clear();
 
         _mainHero.Kill();
-
-        yield return new WaitForSeconds(timeToDestroyAllEntities);
 
         endGameEvent?.Invoke();
     }

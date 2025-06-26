@@ -37,7 +37,7 @@ public class Bootstrap : MonoBehaviour
 
         _loadingScreen.Hide();
 
-        _gameplayCycle = new GameplayCycle(mainHeroSpawner, mainHeroConfig, levelConfig, _confirmPopup, this, _enemiesSpawners, _mainHeroSpawnPoint);
+        _gameplayCycle = new GameplayCycle(mainHeroSpawner, levelConfig, _confirmPopup, this, _enemiesSpawners, _mainHeroSpawnPoint);
 
         yield return _gameplayCycle.Launch();
     }

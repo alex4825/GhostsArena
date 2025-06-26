@@ -6,7 +6,6 @@ using UnityEngine;
 public class GameplayCycle : IDisposable
 {
     private MainHeroSpawner _mainHeroSpawner;
-    private MainHeroConfig _mainHeroConfig;
     private LevelConfig _levelConfig;
     private ConfirmPopup _confirmPopup;
     private MonoBehaviour _context;
@@ -18,7 +17,6 @@ public class GameplayCycle : IDisposable
 
     public GameplayCycle(
         MainHeroSpawner mainHeroSpawner,
-        MainHeroConfig mainHeroConfig,
         LevelConfig levelConfig,
         ConfirmPopup confirmPopup,
         MonoBehaviour context,
@@ -26,7 +24,6 @@ public class GameplayCycle : IDisposable
         Transform mainHeroSpawnPoint)
     {
         _mainHeroSpawner = mainHeroSpawner;
-        _mainHeroConfig = mainHeroConfig;
         _levelConfig = levelConfig;
         _confirmPopup = confirmPopup;
         _context = context;
@@ -45,7 +42,7 @@ public class GameplayCycle : IDisposable
 
         _confirmPopup.Hide();
 
-        _gameMode = new(_levelConfig, _mainHero, _enemiesSpawners, _context);
+        _gameMode = new(_levelConfig, _mainHero, _enemiesSpawners);
 
         _gameMode.Win += OnGameModeWin;
         _gameMode.Defeat += OnGameModeDefeat;
