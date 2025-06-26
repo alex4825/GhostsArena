@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3a2d4aa9cd19645bf07fb3cb03fe7a, type: 3}
   m_Name: MainHeroConfig
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: -4155622822200964909, guid: ade3e4f5bd5c52e48b9e2667e6891f62,
-    type: 3}
   <Race>k__BackingField: 0
   <MaxHealth>k__BackingField: 100
   <WalkingSpeed>k__BackingField: 3
@@ -21,10 +19,11 @@ MonoBehaviour:
   <RotationSpeed>k__BackingField: 800
   <TimeToSpawn>k__BackingField: 2
   <DeadDuration>k__BackingField: 5
+  <ShowDuration>k__BackingField: 2
   <MeleeAttack>k__BackingField: 10
+  <CharacterControllerCharacterPrefab>k__BackingField: {fileID: -4155622822200964909,
+    guid: ade3e4f5bd5c52e48b9e2667e6891f62, type: 3}
   <JumpHeight>k__BackingField: 3
-  <FollowCameraPrefab>k__BackingField: {fileID: 371123635926219165, guid: d31e25f0a138acc49ba365f02e7f8f36,
-    type: 3}
   <DistantAttack>k__BackingField: 15
   <BulletPrefab>k__BackingField: {fileID: 8056850285829155099, guid: aff0a6383a298ae4e8aa2e1745a30855,
     type: 3}

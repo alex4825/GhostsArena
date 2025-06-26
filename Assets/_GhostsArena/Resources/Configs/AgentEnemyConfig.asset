@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0904362f9811ba3439bcd551bf0fa9d8, type: 3}
   m_Name: AgentEnemyConfig
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 5150371798215690389, guid: 7cdd7b81aa43f6446b473a463c3de338,
-    type: 3}
   <Race>k__BackingField: 1
   <MaxHealth>k__BackingField: 100
   <WalkingSpeed>k__BackingField: 3
@@ -21,8 +19,8 @@ MonoBehaviour:
   <RotationSpeed>k__BackingField: 700
   <TimeToSpawn>k__BackingField: 2
   <DeadDuration>k__BackingField: 5
+  <ShowDuration>k__BackingField: 2
   <MeleeAttack>k__BackingField: 10
-  <TimeForIdle>k__BackingField: 2
   <JumpSpeed>k__BackingField: 5
   <JumpCurve>k__BackingField:
     serializedVersion: 2
@@ -48,6 +46,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <AgentEnemyCharacterPrefab>k__BackingField: {fileID: 5150371798215690389, guid: 7cdd7b81aa43f6446b473a463c3de338,
+    type: 3}
+  <PatrolRadius>k__BackingField: 10
   <AgroRange>k__BackingField: 5
   <MinDistanceToTarget>k__BackingField: 0.7
   <AttackCooldown>k__BackingField: 1
